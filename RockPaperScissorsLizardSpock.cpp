@@ -161,6 +161,6 @@ int main() {
                 break;
             }
     } while (userInput != 6);
-
+    cout << "Goodbye!" << endl;
     return 0;
 }
