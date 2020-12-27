@@ -8,18 +8,33 @@ int main() {
     srand (time(NULL));
     int computerInput = 0;
     int userInput = 0;
-
+    cout << "+++Rock-Paper-Scissors-Lizard-Spock+++" << endl;
     do {
         cout << "++++++++++++++++++\n 1: Rock \n 2: Paper \n" 
         << " 3: Scissors \n 4: Lizard \n 5: Spock \n 6: Exit \n++++++++++++++++++" << endl;
-
-        cin >> userInput;
+        bool error;
+        do{
+            error = false;
+            try{
+                cout << "User Input: ";
+                cin >> userInput;
+                if ((cin.fail()) || (userInput > 6)){
+                    throw true;
+                }
+            }
+            catch(bool invalid){
+                cout << "Invalid Input" << endl;
+                cin.clear();
+                cin.ignore();
+                error = true;
+            }
+        }
+        while(error);
         cout << endl;
         computerInput = rand() % 5 + 1;
         
-        if (!isdigit(userInput)) {
-            switch (userInput) {
-            //user chose Rock
+        switch (userInput) {
+        //user chose Rock
             case 1:
                 switch (computerInput) {
                     //computer chose Rock
@@ -145,10 +160,6 @@ int main() {
                 }
                 break;
             }
-        }
-        else {
-            cout << "Invalid Input" << endl;
-        }
     } while (userInput != 6);
 
     return 0;
